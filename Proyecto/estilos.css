@@ -1,0 +1,44 @@
+.imagen{
+    max-width:100%;
+}
+
+#inicio{ background-color: blueviolet;
+
+}
+a{
+    cursor:pointer;
+}
+.alerta{
+    font-weight:700;
+}
+body{
+    background-color: #040500;
+    overflow-x: hidden;
+
+}
+.modal-contenedor{
+    display:flex;
+    align-items: center;
+    gap: 10px;
+    align-content: center;
+  
+}
+.img-carrito{
+    width:200px;
+    padding:20px;
+} 
+.modal-content{
+    background-color: #cac9c9;
+}
+.parrafo{
+    font-weight: 900;
+    font-style: italic;
+}
+
+a{
+    text-decoration: none;
+}
+.boton{
+    opacity:0;
+}
+
