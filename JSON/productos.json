@@ -1,0 +1,28 @@
+[
+       {
+
+      "nombre": "Lujan",
+      "descripcion": "Peltier 558",
+      "img": "img/lujan.jpg"
+    },
+    {
+   
+      "nombre": "Godoy Cruz",
+      "descripcion": "salvador 1982",
+      "img": "img/godoycruz.jpg"
+    },
+    {
+     
+      "nombre": "Guaymallen",
+      "descripcion": "Laprida 1235",
+      "img": "img/guaymallen.jpg"
+    },
+        {
+   
+      "nombre": "Maipu",
+      "descripcion": "Ortiz 2236",
+      "img": "img/maipu.jpg"
+    }
+
+
+  ]

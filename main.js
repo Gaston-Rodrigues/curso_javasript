@@ -1,4 +1,3 @@
-
 const stockProductos= [
  
     { id: 1,
@@ -83,16 +82,6 @@ const stockProductos= [
 
 ] 
 
-let nombre = prompt("Hola! Gracias por tu visita, decinos tu nombre y apellido?");
-
-if((nombre == null) || (nombre == "")){
-alert  ("no ingresaste tu nombre valido")}
-
-else {
-    alert("Desde Mendo-Shop , te damos la bienvenidad " + nombre)
-    
-
-}
 
 let carrito = []
 const contenedor = document.querySelector("#contenedor");
@@ -103,10 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
   mostrarCarrito()
 })
 
+
+//para que el producto se pueda visualizar en el pagina//
  stockProductos.forEach((prod) => {
   const{id,nombre,descripcion,peso,precio,cantidad,img}= prod
 contenedor.innerHTML += `
-  <div class="card 3" style="width: 280px; ">
+  <div class="card 3" style="width: 280px; margin:25px">
   <img class="card-img-top mt-2" src="${img}" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">${nombre}</h5>
@@ -125,12 +116,25 @@ vaciarCarrito.addEventListener("click",()=>{
   carrito.length= [];
   mostrarCarrito()
 })
+//para agregar la cantidad de productos//
 function agregarProducto(id){
-  const item = stockProductos.find((prod) => prod.id === id)
-    carrito.push(item)
-    mostrarCarrito()
-}
 
+    const existe = carrito.some(prod => prod.id === id)
+  
+    if(existe){
+      const prod = carrito.map(prod => {
+        if(prod.id === id){
+          prod.cantidad++
+        }
+      })
+    } else {
+      const item = stockProductos.find((prod) => prod.id === id)
+      carrito.push(item)
+    }
+    mostrarCarrito()
+  
+  };
+//para que se puede mostrar en el carrito cada producto que el cliente seleccione//
 const mostrarCarrito = () => {
   const modalBody = document.querySelector(".modal .modal-body");
  modalBody.innerHTML = "";
@@ -154,13 +158,46 @@ const mostrarCarrito = () => {
     carritoContenedor.textContent = carrito.length;
     guardarStorage()
   
-   }
-
+   
+   carritoContenedor.textContent = carrito.length;
+   //para sumar el precio total del carrito// 
+    precioTotal.innerText = carrito.reduce(
+      (acc, prod) => acc + prod.cantidad * prod.precio,
+      0);
+    guardarStorage()
+  
+ }
+//trae todos los productos menos al que se distitnos de bolsaid//
    function eliminarProducto(id) {
     const bolsaId = id;
     carrito = carrito.filter((bolsa) => bolsa.id !== bolsaId);
     mostrarCarrito();
   }
+  //para que cada vez que recargue la pagina, quede cargado los productos seleccionados anteriormente//
   function guardarStorage() {
     localStorage.setItem("carrito", JSON.stringify(carrito));
   } 
+
+  //una vez que el cliente haga click en finaliza compra, le sale un sweet.alet y el carrito se reinicia//
+//si no tiene nada cargado le sale un sweetalert//
+if (procesarCompra) 
+procesarCompra.addEventListener("click", () => {
+  if (carrito.length === 0) {
+    Swal.fire({
+      title: "¡Tu carrito está vacio!",
+      text: "Compra algo para continuar con la compra",
+      icon: "error",
+      confirmButtonText: "Aceptar",
+    });
+  } else {Swal.fire({
+      icon: 'success',
+      title: 'Tu compra fue realizada con  exito',
+      showConfirmButton: false,
+      timer: 1500,
+       
+  });  
+   carrito.length= [] ;
+   mostrarCarrito ();
+location.href = "sede.html"}
+     ;
+});
